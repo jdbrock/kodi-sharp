@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KodiSharp
 {
-    public class KodiFile
+    internal class KodiGetMoviesResponse
     {
-        [JsonProperty("file")] public String FilePath { get; set; }
+        public IList<KodiMovie> Movies { get; set; }
     }
 }

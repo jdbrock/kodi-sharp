@@ -45,6 +45,7 @@
     <Compile Include="Client\KodiClient.cs" />
     <Compile Include="Client\KodiClientConnectionDetails.cs" />
     <Compile Include="Client\KodiRequestBody.cs" />
+    <Compile Include="Common\KodiCastMember.cs" />
     <Compile Include="Common\KodiFile.cs" />
     <Compile Include="Common\KodiResponseWrapper.cs" />
     <Compile Include="Common\KodiSort.cs" />
@@ -52,11 +53,15 @@
     <Compile Include="Common\KodiSortOrder.cs" />
     <Compile Include="Common\KodiSortMethod.cs" />
     <Compile Include="Common\KodiStandardRequestArgs.cs" />
-    <Compile Include="Video\KodiTvEpisode.cs" />
-    <Compile Include="Video\RequestResponseData\KodiTvEpisodeCommon.cs" />
+    <Compile Include="Video\Movies\KodiMovie.cs" />
+    <Compile Include="Video\RequestResponseData\KodiGetTvShows.cs" />
+    <Compile Include="Video\RequestResponseData\KodiGetMovies.cs" />
+    <Compile Include="Video\TV\KodiTvEpisode.cs" />
+    <Compile Include="Video\Movies\KodiMovieLibrary.cs" />
     <Compile Include="Video\RequestResponseData\KodiGetRecentlyAddedEpisodes.cs" />
-    <Compile Include="Video\KodiVideoLibrary.cs" />
+    <Compile Include="Video\TV\KodiTvLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Video\TV\KodiTvShow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

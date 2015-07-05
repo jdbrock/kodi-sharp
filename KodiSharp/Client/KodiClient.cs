@@ -14,8 +14,9 @@ namespace KodiSharp
         // ===========================================================================
         // = Public Properties
         // ===========================================================================
-        
-        public KodiVideoLibrary Video { get; set; }
+
+        public KodiMovieLibrary Movies { get; set; }
+        public KodiTvLibrary TV { get; set; }
 
         // ===========================================================================
         // = Private Fields
@@ -28,12 +29,16 @@ namespace KodiSharp
         // = Construction
         // ===========================================================================
 
+        public KodiClient(String hostName, Int32 port = 8080, String userName = "xbmc", String password = null)
+            : this(new KodiClientConnectionDetails(hostName, port, userName, password)) { }
+
         public KodiClient(KodiClientConnectionDetails connectionDetails)
         {
             _connectionDetails = connectionDetails;
             _restClient = new RestClient(_connectionDetails.Uri);
 
-            Video = new KodiVideoLibrary(this);
+            Movies = new KodiMovieLibrary(this);
+            TV = new KodiTvLibrary(this);
         }
 
         // ===========================================================================

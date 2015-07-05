@@ -12,6 +12,8 @@ namespace KodiSharp
         [JsonProperty("start")] public Int32 Start { get; set; }
         [JsonProperty("end")]   public Int32 End { get; set; }
 
+        public static readonly KodiLimits None = new KodiLimits(0, 0);
+
         public KodiLimits(Int32 start, Int32 end)
         {
             Start = start;
