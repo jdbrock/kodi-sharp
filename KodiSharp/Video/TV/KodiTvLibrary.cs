@@ -34,5 +34,16 @@ namespace KodiSharp
 
             return response.Shows;
         }
+
+        public async Task RemoveShow(int tvShowId)
+        {
+            var cmd = new KodiCommand<KodiRemoveTvShowRequestArgs, string>(
+                "VideoLibrary.RemoveTVShow", new KodiRemoveTvShowRequestArgs(tvShowId));
+
+            var response = await _client.ExecuteCommandAsync(cmd);
+
+            if (response != "OK")
+                throw new Exception("Failed to remove TV show.");
+        }
     }
 }

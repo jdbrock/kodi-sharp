@@ -1,4 +1,5 @@
 ﻿using RestSharp.Portable;
+using RestSharp.Portable.HttpClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace KodiSharp
         {
             _connectionDetails = connectionDetails;
             _restClient = new RestClient(_connectionDetails.Uri);
+            _restClient.Credentials = new NetworkCredential(_connectionDetails.UserName, _connectionDetails.Password);
 
             Movies = new KodiMovieLibrary(this);
             TV = new KodiTvLibrary(this);
@@ -52,8 +54,7 @@ namespace KodiSharp
             var body = new KodiRequestBody(command.MethodName, command.RequestArguments);
 
             var request = new RestRequest("jsonrpc");
-            request.Method = HttpMethod.Post;
-            request.Credentials = new NetworkCredential(_connectionDetails.UserName, _connectionDetails.Password);
+            request.Method = Method.POST;
             request.AddJsonBody(body);
 
             var response = await _restClient.Execute<KodiResponseWrapper<TResponse>>(request);
