@@ -1,5 +1,5 @@
-﻿using RestSharp.Portable;
-using RestSharp.Portable.HttpClient;
+﻿using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +37,11 @@ namespace KodiSharp
         {
             _connectionDetails = connectionDetails;
             _restClient = new RestClient(_connectionDetails.Uri);
-            _restClient.Credentials = new NetworkCredential(_connectionDetails.UserName, _connectionDetails.Password);
+
+            _restClient.Authenticator = new HttpBasicAuthenticator(
+                _connectionDetails.UserName, 
+                _connectionDetails.Password
+            );
 
             Movies = new KodiMovieLibrary(this);
             TV = new KodiTvLibrary(this);
@@ -54,12 +58,12 @@ namespace KodiSharp
             var body = new KodiRequestBody(command.MethodName, command.RequestArguments);
 
             var request = new RestRequest("jsonrpc");
-            request.Method = Method.POST;
+            request.Method = Method.Post;
             request.AddJsonBody(body);
 
-            var response = await _restClient.Execute<KodiResponseWrapper<TResponse>>(request);
+            var response = await _restClient.ExecuteAsync<KodiResponseWrapper<TResponse>>(request);
 
-            if (!response.IsSuccess)
+            if (!response.IsSuccessful)
                 throw new Exception(String.Format("Request failed. Response: {0}: {1}", response.StatusCode, response.StatusDescription));
 
             return response.Data.Result;
